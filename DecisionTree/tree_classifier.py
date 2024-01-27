@@ -61,7 +61,7 @@ class DecisionTreeClassifier(DecisionTree):
                        reshape(n_classes, -1)[:, uniq_sorted_inds - 1][:, 1:] - left_freqs)
         left_n = left_freqs.sum(axis=0)
         right_n = target_vector.shape[0] - left_n
-        left_freqs = left_freqs / left_n
+        left_freqs = left_freqs / (left_n + 1e-8)
         right_freqs = right_freqs / (right_n + 1e-8)
         gini = (left_n * np.sum(left_freqs ** 2, axis=0) +
                 right_n * np.sum(right_freqs ** 2, axis=0))
