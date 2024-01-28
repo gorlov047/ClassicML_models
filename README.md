@@ -1,8 +1,4 @@
-
-
-
-  # Some classic ML models.
-
+## Some classic ML models.
 
 <div align="center">
 <br />
@@ -56,7 +52,7 @@ A repository with implementations of some classic machine learning models from s
 
 - [NumPy](https://github.com/numpy/numpy)
 
-<p align="right"><a href="#ClassicML_models">Back to top</a></p>
+<p align="right"><a href="#some-classic-ml-models">Back to top</a></p>
 
 ## Roadmap
 There are plans to implement(the list can be updated):
@@ -73,16 +69,16 @@ Features:
 Not implemented yet
 ### Gradient boosting
 Not implemented yet
-<p align="right"><a href="#ClassicML_models">Back to top</a></p>
+<p align="right"><a href="#some-classic-ml-models">Back to top</a></p>
 
 ## Support
 
 Reach out to the maintainer at one of the following places:
 
-- [GitHub discussions](https://github.com/gorlov047/MyGradientBoosting/discussions)
+- [GitHub discussions](https://github.com/gorlov047/ClassicML_models/discussions)
 - The telegram(email) which is located [in GitHub profile](https://github.com/gorlov047)
 
-<p align="right"><a href="#ClassicML_models">Back to top</a></p>
+<p align="right"><a href="#some-classic-ml-models">Back to top</a></p>
 
 ## License
 
@@ -90,7 +86,7 @@ This repository is licensed under the **MIT license**. Feel free to edit and dis
 
 See [LICENSE](LICENSE) for more information.
 
-<p align="right"><a href="#ClassicML_models">Back to top</a></p>
+<p align="right"><a href="#some-classic-ml-models">Back to top</a></p>
 
 ## Sources of knowledge
 Sources that have been used to understand the gradient boosting model  
@@ -98,4 +94,4 @@ https://academy.yandex.ru/handbook/ml
 https://github.com/esokolov/ml-course-hse  
 https://mlcourse.ai/book/index.html#
 
-<p align="right"><a href="#ClassicML_models">Back to top</a></p>
+<p align="right"><a href="#some-classic-ml-models">Back to top</a></p>
