@@ -37,9 +37,11 @@ class DecisionTreeClassifier(DecisionTree):
         )
 
     def _leaf_value(self, node: dict, y: Arr)-> Num:
-        counts = np.bincount(y)
-        node["value"] = counts.argmax()
-        node["probs"] = counts / y.shape
+        classes, counts = np.unique(y, return_counts=True)
+        node["value"] = classes[counts.argmax()]
+        probs = np.zeros(self.n_classes)
+        probs[classes - 1] = counts / y.shape
+        node["probs"] = probs
 
     def _find_best_split(
         self,
