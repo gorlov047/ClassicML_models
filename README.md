@@ -57,7 +57,13 @@ A repository with implementations of some classic machine learning models from s
 ## Roadmap
 There are plans to implement(the list can be updated):
 ### Linear models
-Not implemented yet
+At the moment, linear regression is implemented.
+The analytical solution is not interesting, therefore, gradient descent and its modifications are used to find the optimal vector of weights.
+
+Features:
+- Loss functions such as MSE, MAE, LogCosh and Huber can be used.
+- To optimize the loss function, you can use GD, SHGD, Momentum and Adam.
+- You can add L1 or L2 regularization to any kind of gradient descent.
 ### Decision tree
 Brief documentation on the implementation is available as docstrings to the functions.
 
