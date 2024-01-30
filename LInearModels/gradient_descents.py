@@ -1,4 +1,4 @@
-from typing import Dict, Type
+from typing import Dict, Tuple, Type
 import numpy as np
 from base_descent import BaseDescent, BaseDescentReg
 from loss_functions import LossFunction, MSE
@@ -6,6 +6,11 @@ from loss_functions import LossFunction, MSE
 class VanillaGradientDescent(BaseDescent):
     """Full gradient descent class.
     """
+    def __init__(self, dimension: Tuple[int, int], lambda_: float = 1e-3,
+                loss_function: LossFunction = MSE()
+            )->None:
+        super().__init__(dimension, lambda_, loss_function)
+
     def update_weights(self, gradient: np.ndarray) -> np.ndarray:
         step = -self.lr() * gradient
         self.w += step

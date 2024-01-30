@@ -105,7 +105,7 @@ class BaseDescentReg(BaseDescent, ABC):
     type_: 'l2': add a L2 penalty term;
           'l1': add a L1 penalty term;
     """
-    
+
     @abstractmethod
     def __init__(self, *args, mu: float = 0, type_: str = 'l2', **kwargs)->None:
         super().__init__(*args, **kwargs)
@@ -124,7 +124,7 @@ class BaseDescentReg(BaseDescent, ABC):
         else:
             raise ValueError
         return super().calc_gradient(x, y) + reg_term * self.mu / 2
-    
+
     def calc_loss(self, x: np.ndarray, y: np.ndarray) -> float:
         reg_term = 0
         if self.type_ == "l1":
