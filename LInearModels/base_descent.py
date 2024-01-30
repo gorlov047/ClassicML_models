@@ -105,7 +105,7 @@ class BaseDescentReg(BaseDescent, ABC):
     type_: 'l2': add a L2 penalty term;
           'l1': add a L1 penalty term;
     """
-
+    
     @abstractmethod
     def __init__(self, *args, mu: float = 0, type_: str = 'l2', **kwargs)->None:
         super().__init__(*args, **kwargs)
@@ -115,10 +115,22 @@ class BaseDescentReg(BaseDescent, ABC):
 
     @abstractmethod
     def calc_gradient(self, x: np.ndarray, y: np.ndarray) -> np.ndarray:
-
-        weights_norm = np.copy(self.w)
-        weights_norm[-1] = 0
-        if self.type_ == 'l2':
-            weights_norm = weights_norm ** 2
-
-        return super().calc_gradient(x, y) + sum(abs(weights_norm)) * self.mu / 2
+        reg_term = self.w.copy
+        reg_term[-1] = 0
+        if self.type_ == "l1":
+            reg_term = 2 * np.sign(reg_term)
+        elif self.type_ == "l2":
+            reg_term = 2 * reg_term
+        else:
+            raise ValueError
+        return super().calc_gradient(x, y) + reg_term * self.mu / 2
+    
+    def calc_loss(self, x: np.ndarray, y: np.ndarray) -> float:
+        reg_term = 0
+        if self.type_ == "l1":
+            reg_term = sum(abs(self.w[:-1]))
+        elif self.type_ == "l2":
+            reg_term = sum(self.w[:-1] ** 2)
+        else:
+            raise ValueError
+        return super().loss_function.calc_loss(y, np.dot(x, self.w)) + reg_term * self.mu / 2
