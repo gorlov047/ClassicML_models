@@ -37,20 +37,12 @@ class LinearRegression:
         -------
         fitted linear regressor
         """
-        iteration = 0
-        sq_norm_w_diff = self.tolerance
-
-        while iteration < self.max_iter and sq_norm_w_diff >= self.tolerance:
-            iteration += 1
-            self.loss_history.append(self.calc_loss(x, y))
-            old_w = np.copy(self.descent.w)
-            self.descent.update_weights(self.descent.calc_gradient(x, y))
-            diff_w = old_w - self.descent.w
-            if np.isnan(diff_w).sum():
-                break
-            sq_norm_w_diff = np.dot(diff_w, diff_w)
-
         self.loss_history.append(self.calc_loss(x, y))
+        for _ in range(self.max_iter):
+            diff_w = self.descent.update_weights(self.descent.calc_gradient(x, y))
+            self.loss_history.append(self.calc_loss(x, y))
+            if np.dot(diff_w.T, diff_w) < self.tolerance:
+                break
         return self
 
     def predict(self, x: np.ndarray) -> np.ndarray:
