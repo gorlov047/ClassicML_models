@@ -57,13 +57,21 @@ A repository with implementations of some classic machine learning models from s
 ## Roadmap
 There are plans to implement(the list can be updated):
 ### Linear models
-At the moment, linear regression is implemented.
+#### Linear regression
 The analytical solution is not interesting, therefore, gradient descent and its modifications are used to find the optimal vector of weights.
 
 Features:
 - Loss functions such as MSE, MAE, LogCosh and Huber can be used.
-- To optimize the loss function, you can use GD, SHGD, Momentum and Adam.
+- To optimize the loss function, you can use GD, SGD, Momentum and Adam.
 - You can add L1 or L2 regularization to any kind of gradient descent.
+#### Logistic regression(multinomial)
+There is no analytical solution, therefore, gradient descent and its modifications are used to find the optimal vector of weights.
+
+Features:
+- It is implemented using inheritance from linear regression with the addition of a restriction on the loss function, since in our case it is a wrapper over gradient methods.
+- CrossEntropy loss
+- The loss minimised is the multinomial loss fit across the entire probability distribution,even when the data is binary.  
+
 ### Decision tree
 Brief documentation on the implementation is available as docstrings to the functions.
 
