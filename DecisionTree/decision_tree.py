@@ -22,6 +22,15 @@ class DecisionTree(metaclass=ABCMeta):
 
     min_samples_leaf : int, default=None
         The minimum number of samples required to be at a leaf node.
+
+    n_feats: str, default=None
+        Specifies the number of features to sample on each split.
+        If None,use all features on each split;
+        "sqrt" - heuristics for classification;
+        "n/3" - heuristics for regression.
+        
+    seed: int, default=None
+        Seed for the random number generator.
     """
 
     @abstractmethod
@@ -29,6 +38,8 @@ class DecisionTree(metaclass=ABCMeta):
         self,
         max_depth: int = None,
         min_samples_split: int = None,
+        n_feats: str = None,
+        seed: int = None
     )-> None:
         self._tree = {}
         self.max_depth = max_depth
@@ -72,7 +83,21 @@ class DecisionTree(metaclass=ABCMeta):
             return
 
         feature_best, threshold_best, gain_best, split = None, None, None, None
-        for feature in range(sub_x.shape[1]):
+
+        if self.n_feat is None:
+            features = np.arange(sub_x.shape[1])
+        elif self.n_feats == "sqrt":
+            features = np.random.choice(sub_x.shape[1],
+                                       int(sub_x.shape[1] ** 0.5),
+                                       replace=False)
+        elif self.n_feats == "n/3":
+            features = np.random.choice(sub_x.shape[1],
+                           int(sub_x.shape[1] / 3),
+                           replace=False)
+        else:
+            raise ValueError
+
+        for feature in (features):
             feature_vector = sub_x[:, feature].astype(np.float64)
 
             if np.all(np.isclose(feature_vector, feature_vector[0])):

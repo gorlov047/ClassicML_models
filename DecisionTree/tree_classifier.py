@@ -29,11 +29,15 @@ class DecisionTreeClassifier(DecisionTree):
     def __init__(
         self,
         max_depth: int = None,
-        min_samples_split: int = None
+        min_samples_split: int = None,
+        n_feats: str = None,
+        seed: int = None
     )-> None:
         super().__init__(
             max_depth=max_depth,
-            min_samples_split=min_samples_split
+            min_samples_split=min_samples_split,
+            n_feats = n_feats,
+            seed = seed
         )
 
     def _leaf_value(self, node: dict, y: Arr)-> Num:
