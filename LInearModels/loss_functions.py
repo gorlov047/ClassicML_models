@@ -92,3 +92,31 @@ class Huber(LossFunction):
         return np.where(diff <= self.delta, diff ** 2 / 2,
                         self.delta * (diff - self.delta / 2)
                        ).mean()
+
+
+class CrossEntropy(LossFunction):
+    """CrossEntropy Loss.
+    When there are only two classes, this loss function
+    is equivalent to the LogLoss loss function.
+    
+    Parameters
+    -------
+    n_classes: number of classes
+    """
+    def __init__(self, n_classes: int = 2)->None:
+        self.n_classes = n_classes
+
+    def calc_gradient(self, x: np.ndarray, y: np.ndarray, w: np.ndarray) -> np.ndarray:
+        def get_one_hot(targets, nb_classes):
+            res = np.eye(nb_classes, dtype=int)[np.array(targets).reshape(-1)]
+            return res.reshape(list(targets.shape)+[nb_classes])
+
+        y_pred = np.dot(x, w)
+        probs = np.exp(y_pred)
+        probs /= np.expand_dims(probs.sum(axis=1), 1)
+        return np.dot(x.T, probs - get_one_hot(y, self.n_classes))
+
+    def calc_loss(self, y_true: np.ndarray, y_pred: np.ndarray) -> float:
+        probs = np.exp(y_pred)
+        probs /= np.expand_dims(probs.sum(axis=1), 1)
+        return -np.log(probs[np.arange(y_true.shape[0]), y_true]).mean()
