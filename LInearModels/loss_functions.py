@@ -107,14 +107,10 @@ class CrossEntropy(LossFunction):
         self.n_classes = n_classes
 
     def calc_gradient(self, x: np.ndarray, y: np.ndarray, w: np.ndarray) -> np.ndarray:
-        def get_one_hot(targets, nb_classes):
-            res = np.eye(nb_classes, dtype=int)[np.array(targets).reshape(-1)]
-            return res.reshape(list(targets.shape)+[nb_classes])
-
         y_pred = np.dot(x, w)
         probs = np.exp(y_pred)
         probs /= np.expand_dims(probs.sum(axis=1), 1)
-        return np.dot(x.T, probs - get_one_hot(y, self.n_classes))
+        return np.dot(x.T, probs - np.eye(self.n_classes)[y])
 
     def calc_loss(self, y_true: np.ndarray, y_pred: np.ndarray) -> float:
         probs = np.exp(y_pred)
