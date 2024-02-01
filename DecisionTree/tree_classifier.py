@@ -58,13 +58,10 @@ class DecisionTreeClassifier(DecisionTree):
                                                      return_index=True)
         tresholds = (sorted_feature[1:] + sorted_feature[:-1]) / 2
         classes, counts = np.unique(target_vector, return_counts=True)
-        n_classes = classes.shape[0]
-        left_freqs = np.tile(target_vector, (n_classes, 1))
-        for i in range(n_classes):
-            left_freqs[i] = np.where(left_freqs[i] == i, 1, 0)
+        left_freqs = np.eye(self.n_classes)[target_vector].T[classes]
         left_freqs = np.cumsum(left_freqs, axis=1)[:, uniq_sorted_inds - 1][:, 1:]
         right_freqs = (np.repeat(counts, target_vector.shape[0]).
-                       reshape(n_classes, -1)[:, uniq_sorted_inds - 1][:, 1:] - left_freqs)
+                       reshape(classes.shape[0], -1)[:, uniq_sorted_inds - 1][:, 1:] - left_freqs)
         left_n = left_freqs.sum(axis=0)
         right_n = target_vector.shape[0] - left_n
         left_freqs = left_freqs / (left_n + 1e-8)
