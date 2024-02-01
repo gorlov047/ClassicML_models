@@ -44,6 +44,9 @@ class DecisionTree(metaclass=ABCMeta):
         self._tree = {}
         self.max_depth = max_depth
         self.min_samples_split = min_samples_split
+        self.n_feats=n_feats
+        if seed is not None:
+            np.random.seed(seed)
 
     @abstractmethod
     def _find_best_split(
