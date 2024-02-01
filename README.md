@@ -80,7 +80,12 @@ Features:
 - Avoiding loops wherever possible and vectorizing calculations using numpy.
 - Hyperparameters responsible for limiting the maximum depth and minimum number of objects in a node for splitting it as a regularization.
 ### Random Forest
-Not implemented yet
+Classic bagging + using a random subset of features for each split to reduce the correlation between trees.  
+
+Features:
+- The implementation is based on self-implemented decision trees
+- The root of all the features for classification and a third of the features for regression in each split are selected randomly
+- Random seed can be set for reproducibility of results
 ### Gradient boosting
 Not implemented yet
 <p align="right"><a href="#some-classic-ml-models">Back to top</a></p>
