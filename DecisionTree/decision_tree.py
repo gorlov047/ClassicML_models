@@ -86,7 +86,7 @@ class DecisionTree(metaclass=ABCMeta):
 
         if self.n_feats is None:
             features = np.arange(sub_x.shape[1])
-        elif self.n_feat == "sqrt":
+        elif self.n_feats == "sqrt":
             features = np.random.choice(sub_x.shape[1],
                                        int(sub_x.shape[1] ** 0.5),
                                        replace=False)
