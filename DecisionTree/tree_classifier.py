@@ -76,6 +76,10 @@ class DecisionTreeClassifier(DecisionTree):
         gini_best = gini[best_ind]
         return tresholds, gini, treshold_best, gini_best
 
+    def fit(self, X: Arr, y: Arr)-> DecisionTree:
+        self.n_classes = y.max() + 1
+        return super().fit(X, y)
+
     def predict_proba(self, X: Arr) -> Arr:
         """Predict class probabilities of the input samples X.
 
